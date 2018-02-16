@@ -1,8 +1,5 @@
 package sample;
 
-// -fx-pie-label-visible: false; - add to CSS
-// -fx-border-color: white;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,11 +25,10 @@ public class Donut extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Misanthrope's Donut");
-       // primaryStage.getIcons().add(new Image(Donut.class.getResourceAsStream("donutIcon.png")));
         primaryStage.getIcons().add(new Image("/donutIcon.png"));
 
         GridPane gridPane = new GridPane();
-        //gridPane.setGridLinesVisible(true);     // GRID PANE LINES VISIBLE***************
+        //gridPane.setGridLinesVisible(true);
 
         gridPane.setHgap(15);
         gridPane.setVgap(10);
