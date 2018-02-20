@@ -1,0 +1,35 @@
+.root {
+    -fx-background-color: linear-gradient(#f5f7fa 0%, #c3cfe2 100%);
+    }
+
+#welcome-text {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 30px;
+}
+#pastSuffer {
+-fx-font-family: "Roboto";
+    -fx-font-size: 16px;
+}
+#futureSuffer{
+-fx-font-family: "Roboto";
+    -fx-font-size: 16px;
+}
+#commentsOut {
+-fx-font-family: "Roboto";
+    -fx-font-size: 24px;
+    -fx-font-color: yellow;
+}
+.chart {
+-fx-pie-label-visible: true;
+    -fx-legend-side: right;
+-fx-pie-label-visible: false;
+
+}
+.data0.chart-pie {
+-fx-pie-color: #0fd850;
+
+}
+.data1.chart-pie {
+-fx-pie-color: #ff4e50;
+
+}
