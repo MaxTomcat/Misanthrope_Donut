@@ -168,8 +168,7 @@ public class Donut extends Application {
                 LocalDate dateOne = startDatePicker.getValue();
                 LocalDate dateTwo = finishDatePicker.getValue();
 
-                if (dateOne == null || dateTwo == null ||
-                        (dateOne == null & dateTwo == null)){
+                if (dateOne == null || dateTwo == null){
                     commentsOut.setText("Укажите дату начала и дату конца вахты!");
                     commentsOut.setFill(Color.RED);
                     commentsOut.setTextAlignment(TextAlignment.CENTER);
