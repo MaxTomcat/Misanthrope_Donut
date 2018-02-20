@@ -1,8 +1,5 @@
 package sample;
 
-// -fx-pie-label-visible: false; - add to CSS
-// -fx-border-color: white;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,8 +29,6 @@ public class Donut extends Application {
         primaryStage.getIcons().add(new Image("/donutIcon.png"));
 
         GridPane gridPane = new GridPane();
-        //gridPane.setGridLinesVisible(true);     // GRID PANE LINES VISIBLE***************
-
         gridPane.setHgap(15);
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(10, 0, 20, 0));
@@ -60,7 +55,7 @@ public class Donut extends Application {
         Text daysNum = new Text("0 дней");
         gridPane.add(daysNum, 2, 4);
 
-        Text commentsOut = new Text(); // Needs CSS Styling
+        Text commentsOut = new Text(); 
         commentsOut.setId("commentsOut");
         gridPane.add(commentsOut, 5, 21);
 
@@ -95,8 +90,7 @@ public class Donut extends Application {
         comments.put(28, "День 28: Так, все приготовления сделаны, осталось\nтолько найти место где зарыть трупы\nи можно начинать УХА-ХА-ХА-ХА!!!!!");
         comments.put(29, "День 29: Домооооооой!\nКак говорится, \"Goodbye, Motherfuckers!!!\"");
         comments.put(30, "День 30: Домооооооой!\nКак говорится, \"Goodbye, Motherfuckers!!!\"");
-
-        // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
+        
         Text pastSuffer = new Text("Отмучился");
         pastSuffer.setId("pastSuffer");
         gridPane.add(pastSuffer, 1, 7, 2, 1);
@@ -126,7 +120,6 @@ public class Donut extends Application {
         Text pastSufferSecondsNum = new Text("0,0");
         gridPane.add(pastSufferSecondsNum, 1, 12);
 
-        // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
         Text futureSuffer = new Text("Еще страдать");
         futureSuffer.setId("futureSuffer");
         gridPane.add(futureSuffer,1, 14, 2, 1);
@@ -156,7 +149,6 @@ public class Donut extends Application {
         Text futureSufferSecondsNum = new Text("0,0");
         gridPane.add(futureSufferSecondsNum, 1, 19);
 
-        // PIE CHART ADDITION
         ObservableList<PieChart.Data> diagram = FXCollections.observableArrayList(
                 new PieChart.Data("Отмучился", 1),
                 new PieChart.Data("Еще страдать", 2));
@@ -176,7 +168,7 @@ public class Donut extends Application {
                 LocalDate dateOne = startDatePicker.getValue();
                 LocalDate dateTwo = finishDatePicker.getValue();
 
-                if (dateOne == null || dateTwo == null || /*totalPeriod == 0 ||*/
+                if (dateOne == null || dateTwo == null ||
                         (dateOne == null & dateTwo == null)){
                     commentsOut.setText("Укажите дату начала и дату конца вахты!");
                     commentsOut.setFill(Color.RED);
@@ -207,14 +199,12 @@ public class Donut extends Application {
                 double secondsTilltheEnd = minutesTilltheEnd * 60;
                     String secondsTilltheEndRIghtFormat = String.format("%.2f", secondsTilltheEnd);
 
-                // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
                 pastSufferWeeksNum.setText(weeksPassedRightFormat);
                 pastSufferDaysNum.setText(daysPassedRightFormat);
                 pastSufferHoursNum.setText(hoursPassedRightFormat);
                 pastSufferMinutesNum.setText(minutesPassedRightFormat);
                 pastSufferSecondsNum.setText(secondsPasedRightFormat);
 
-                // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
                 futureSufferWeeksNum.setText(weeksTIlltheEndRightFormat);
                 futureSufferDaysNum.setText(daysTilltheEndRightFormat);
                 futureSufferHoursNum.setText(hoursTilltheEndRightFormat);
@@ -234,14 +224,12 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                     finishDatePicker.setValue(null);
                     daysNum.setText("0 дней");
 
-                    // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
                     pastSufferWeeksNum.setText("0,0");
                     pastSufferDaysNum.setText("0,0");
                     pastSufferHoursNum.setText("0,0");
                     pastSufferMinutesNum.setText("0,0");
                     pastSufferSecondsNum.setText("0,0");
 
-                    // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
                     futureSufferWeeksNum.setText("0,0");
                     futureSufferDaysNum.setText("0,0");
                     futureSufferHoursNum.setText("0,0");
@@ -259,14 +247,12 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                     finishDatePicker.setValue(null);
                     daysNum.setText("0 дней");
 
-                    // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
                     pastSufferWeeksNum.setText("0,0");
                     pastSufferDaysNum.setText("0,0");
                     pastSufferHoursNum.setText("0,0");
                     pastSufferMinutesNum.setText("0,0");
                     pastSufferSecondsNum.setText("0,0");
 
-                    // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
                     futureSufferWeeksNum.setText("0,0");
                     futureSufferDaysNum.setText("0,0");
                     futureSufferHoursNum.setText("0,0");
@@ -306,8 +292,6 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
 
                     pastSuffer.setText("До начала мучений осталось");
 
-
-                    // BLOCK OF CALCULATION OUTPUT "ДО НАЧАЛА МУЧЕНИЙ ОСТАЛОСЬ"
                     pastSufferWeeksNum.setText(weeksTillStartRightFormat);
                     pastSufferDaysNum.setText(daysTillStartRightFormat);
                     pastSufferHoursNum.setText(hoursTillStartRightFormat);
@@ -316,7 +300,6 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
 
                     futureSuffer.setText("Ты будешь страдать");
 
-                    // BLOCK OF CALCULATION OUTPUT "ТЫ БУДЕШЬ СТРАДАТЬ"
                     futureSufferWeeksNum.setText(weeksTIlltheEndFutureRightFormat);
                     futureSufferDaysNum.setText(daysTilltheEndFutureRightFormat);
                     futureSufferHoursNum.setText(hoursTilltheEndFutureRightFormat);
@@ -349,7 +332,6 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                 daysNum.setText("0 дней");
                 pastSuffer.setText("Отмучился");
 
-                // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
                 pastSufferWeeksNum.setText("0,0");
                 pastSufferDaysNum.setText("0,0");
                 pastSufferHoursNum.setText("0,0");
@@ -357,7 +339,7 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                 pastSufferSecondsNum.setText("0,0");
 
                 futureSuffer.setText("Еще страдать");
-                // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
+
                 futureSufferWeeksNum.setText("0,0");
                 futureSufferDaysNum.setText("0,0");
                 futureSufferHoursNum.setText("0,0");
@@ -370,7 +352,6 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                 commentsOut.setText("");
             }});
 
-        // SCENE & STAGE START
         Scene scene = new Scene(gridPane, 1000, 700);
         primaryStage.setScene(scene);
         scene.getStylesheets().add("Donut.css");
