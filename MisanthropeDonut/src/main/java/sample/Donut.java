@@ -25,7 +25,6 @@ public class Donut extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Misanthrope's Donut");
-       // primaryStage.getIcons().add(new Image(Donut.class.getResourceAsStream("donutIcon.png")));
         primaryStage.getIcons().add(new Image("/donutIcon.png"));
 
         GridPane gridPane = new GridPane();
@@ -55,11 +54,12 @@ public class Donut extends Application {
         Text daysNum = new Text("0 дней");
         gridPane.add(daysNum, 2, 4);
 
-        Text commentsOut = new Text(); 
+        Text commentsOut = new Text();
         commentsOut.setId("commentsOut");
         gridPane.add(commentsOut, 5, 21);
 
         HashMap<Integer, String> comments = new HashMap<>();
+        comments.put(0, "С прибытием!");
         comments.put(1, "День 1: Ура!!!!! Как я соскучился!\nКак я рад вас всех видеть!");
         comments.put(2, "День 2: Э-э-э.... А меня что, не в 1.1.1. поселили?\nНадо поговорить с Ярославом.");
         comments.put(3, "День 3: На интересной работе и сны интересные видишь ;)");
@@ -79,7 +79,7 @@ public class Donut extends Application {
         comments.put(17, "День 17: Только выдержка поможет\nвыжить в мире идиотов!  ");
         comments.put(18, "День 18: Окружающие всё больше и больше раздражают.");
         comments.put(19, "День 19: Интересно, если просто отвернуться\nот собеседника, он поймет, что я с ним не хочу общаться?");
-        comments.put(20, "День 20: Почему-то во время совещаний начинаешь\nрисоватьв блокноте изощрённые орудия убийства.");
+        comments.put(20, "День 20: Почему-то во время совещаний начинаешь\nрисовать в блокноте изощрённые орудия убийства.");
         comments.put(21, "День 21: А Брейвик-то, оказывается, неплохой парень,\nпросто его все достали.");
         comments.put(22, "День 22: Кашляющие и чихающие люди в офисе\nточно подлежат уничтожению.");
         comments.put(23, "День 23: Ну почему мне отказали на заявку\nстерилизовать офис, когда люди будут внутри :((");
@@ -90,7 +90,8 @@ public class Donut extends Application {
         comments.put(28, "День 28: Так, все приготовления сделаны, осталось\nтолько найти место где зарыть трупы\nи можно начинать УХА-ХА-ХА-ХА!!!!!");
         comments.put(29, "День 29: Домооооооой!\nКак говорится, \"Goodbye, Motherfuckers!!!\"");
         comments.put(30, "День 30: Домооооооой!\nКак говорится, \"Goodbye, Motherfuckers!!!\"");
-        
+
+        // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
         Text pastSuffer = new Text("Отмучился");
         pastSuffer.setId("pastSuffer");
         gridPane.add(pastSuffer, 1, 7, 2, 1);
@@ -120,6 +121,7 @@ public class Donut extends Application {
         Text pastSufferSecondsNum = new Text("0,0");
         gridPane.add(pastSufferSecondsNum, 1, 12);
 
+        // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
         Text futureSuffer = new Text("Еще страдать");
         futureSuffer.setId("futureSuffer");
         gridPane.add(futureSuffer,1, 14, 2, 1);
@@ -155,9 +157,6 @@ public class Donut extends Application {
         final PieChart chart = new PieChart(diagram);
         gridPane.add(chart, 5, 6, 1, 15);
 
-        Label caption = new Label("");
-        gridPane.add(caption, 0,0);
-
                 Button calculate = new Button("Считаем");
         HBox hbCalcBtn = new HBox(10);
         gridPane.add(hbCalcBtn, 1, 5, 1, 1);
@@ -167,68 +166,28 @@ public class Donut extends Application {
             public void handle(ActionEvent event) throws NullPointerException{
                 LocalDate dateOne = startDatePicker.getValue();
                 LocalDate dateTwo = finishDatePicker.getValue();
+                long totalPeriod = ChronoUnit.DAYS.between(dateOne, dateTwo);
+
+                pastSuffer.setText("Отмучился");
+                futureSuffer.setText("Еще страдать");
 
                 if (dateOne == null || dateTwo == null){
                     commentsOut.setText("Укажите дату начала и дату конца вахты!");
                     commentsOut.setFill(Color.RED);
                     commentsOut.setTextAlignment(TextAlignment.CENTER);
                     return;
-                }
-
-                long totalPeriod = ChronoUnit.DAYS.between(dateOne, dateTwo);
-                double daysPassed = ChronoUnit.DAYS.between(dateOne, LocalDate.now());
-                    String daysPassedRightFormat = String.format("%.2f", daysPassed);
-                double weeksPassed = daysPassed / 7;
-                    String weeksPassedRightFormat = String.format("%.4f", weeksPassed);
-                double hoursPassed = daysPassed * 24;
-                    String hoursPassedRightFormat = String.format("%.2f", hoursPassed);
-                double minutesPassed = hoursPassed * 60;
-                    String minutesPassedRightFormat = String.format("%.2f", minutesPassed);
-                double secondsPassed = minutesPassed * 60;
-                    String secondsPasedRightFormat = String.format("%.2f", secondsPassed);
-
-                double daysTilltheEnd = ChronoUnit.DAYS.between(LocalDate.now(), dateTwo);
-                    String daysTilltheEndRightFormat = String.format("%.2f", daysTilltheEnd);
-                double weeksTilltheEnd = daysTilltheEnd / 7;
-                    String weeksTIlltheEndRightFormat = String.format("%.4f", weeksTilltheEnd);
-                double hoursTilltheEnd = daysTilltheEnd * 24;
-                    String hoursTilltheEndRightFormat = String.format("%.2f", hoursTilltheEnd);
-                double minutesTilltheEnd = hoursTilltheEnd * 60;
-                    String minutesTilltheEndRightFormat = String.format("%.2f", minutesTilltheEnd);
-                double secondsTilltheEnd = minutesTilltheEnd * 60;
-                    String secondsTilltheEndRIghtFormat = String.format("%.2f", secondsTilltheEnd);
-
-                pastSufferWeeksNum.setText(weeksPassedRightFormat);
-                pastSufferDaysNum.setText(daysPassedRightFormat);
-                pastSufferHoursNum.setText(hoursPassedRightFormat);
-                pastSufferMinutesNum.setText(minutesPassedRightFormat);
-                pastSufferSecondsNum.setText(secondsPasedRightFormat);
-
-                futureSufferWeeksNum.setText(weeksTIlltheEndRightFormat);
-                futureSufferDaysNum.setText(daysTilltheEndRightFormat);
-                futureSufferHoursNum.setText(hoursTilltheEndRightFormat);
-                futureSufferMinutesNum.setText(minutesTilltheEndRightFormat);
-                futureSufferSecondsNum.setText(secondsTilltheEndRIghtFormat);
-
-                int daysPassedFormatNeeded = (int)daysPassed;
-                daysNum.setText(Long.toString(totalPeriod) + " дней");
-                commentsOut.setText(comments.get(daysPassedFormatNeeded));
-                commentsOut.setFill(Color.BLACK);
-                commentsOut.setTextAlignment(TextAlignment.CENTER);
-
-diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
-        new PieChart.Data("Еще страдать", daysTilltheEnd));
-
-                if(dateTwo.isBefore(LocalDate.now())){
+                } else if(dateTwo.isBefore(LocalDate.now())){
                     finishDatePicker.setValue(null);
                     daysNum.setText("0 дней");
 
+                    // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
                     pastSufferWeeksNum.setText("0,0");
                     pastSufferDaysNum.setText("0,0");
                     pastSufferHoursNum.setText("0,0");
                     pastSufferMinutesNum.setText("0,0");
                     pastSufferSecondsNum.setText("0,0");
 
+                    // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
                     futureSufferWeeksNum.setText("0,0");
                     futureSufferDaysNum.setText("0,0");
                     futureSufferHoursNum.setText("0,0");
@@ -246,12 +205,14 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                     finishDatePicker.setValue(null);
                     daysNum.setText("0 дней");
 
+                    // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
                     pastSufferWeeksNum.setText("0,0");
                     pastSufferDaysNum.setText("0,0");
                     pastSufferHoursNum.setText("0,0");
                     pastSufferMinutesNum.setText("0,0");
                     pastSufferSecondsNum.setText("0,0");
 
+                    // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
                     futureSufferWeeksNum.setText("0,0");
                     futureSufferDaysNum.setText("0,0");
                     futureSufferHoursNum.setText("0,0");
@@ -268,29 +229,30 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                 } else if(dateOne.isAfter(LocalDate.now()) & dateTwo.isAfter(dateOne)){
 
                     double daysTillStart = ChronoUnit.DAYS.between(LocalDate.now(), dateOne);
-                        String daysTillStartRightFormat = String.format("%.2f", daysTillStart);
+                    String daysTillStartRightFormat = String.format("%.2f", daysTillStart);
                     double weeksTillStart = daysTillStart / 7;
-                        String weeksTillStartRightFormat = String.format("%.4f", weeksTillStart);
+                    String weeksTillStartRightFormat = String.format("%.4f", weeksTillStart);
                     double hoursTillStart = daysTillStart * 24;
-                        String hoursTillStartRightFormat = String.format("%.2f", hoursTillStart);
+                    String hoursTillStartRightFormat = String.format("%.2f", hoursTillStart);
                     double minutesTillStart = hoursTillStart * 60;
-                        String minutesTillStartRightFormat = String.format("%.2f", minutesTillStart);
+                    String minutesTillStartRightFormat = String.format("%.2f", minutesTillStart);
                     double secondsTillStart = minutesTillStart * 60;
-                        String secondsTillStartRightFormat = String.format("%.2f", secondsTillStart);
+                    String secondsTillStartRightFormat = String.format("%.2f", secondsTillStart);
 
                     double daysTilltheEndFuture = ChronoUnit.DAYS.between(dateOne, dateTwo);
-                        String daysTilltheEndFutureRightFormat = String.format("%.2f", daysTilltheEndFuture);
-                    double weeksTilltheEndFuture = daysTilltheEnd / 7;
-                        String weeksTIlltheEndFutureRightFormat = String.format("%.4f", weeksTilltheEndFuture);
-                    double hoursTilltheEndFuture = daysTilltheEnd * 24;
-                        String hoursTilltheEndFutureRightFormat = String.format("%.2f", hoursTilltheEndFuture);
-                    double minutesTilltheEndFuture = hoursTilltheEnd * 60;
-                        String minutesTilltheEndFutureRightFormat = String.format("%.2f", minutesTilltheEndFuture);
-                    double secondsTilltheEndFuture = minutesTilltheEnd * 60;
-                     String secondsTilltheEndFutureRIghtFormat = String.format("%.2f", secondsTilltheEndFuture);
+                    String daysTilltheEndFutureRightFormat = String.format("%.2f", daysTilltheEndFuture);
+                    double weeksTilltheEndFuture = daysTilltheEndFuture / 7;
+                    String weeksTIlltheEndFutureRightFormat = String.format("%.4f", weeksTilltheEndFuture);
+                    double hoursTilltheEndFuture = daysTilltheEndFuture * 24;
+                    String hoursTilltheEndFutureRightFormat = String.format("%.2f", hoursTilltheEndFuture);
+                    double minutesTilltheEndFuture = hoursTilltheEndFuture * 60;
+                    String minutesTilltheEndFutureRightFormat = String.format("%.2f", minutesTilltheEndFuture);
+                    double secondsTilltheEndFuture = minutesTilltheEndFuture * 60;
+                    String secondsTilltheEndFutureRIghtFormat = String.format("%.2f", secondsTilltheEndFuture);
 
                     pastSuffer.setText("До начала мучений осталось");
 
+                    // BLOCK OF CALCULATION OUTPUT "ДО НАЧАЛА МУЧЕНИЙ ОСТАЛОСЬ"
                     pastSufferWeeksNum.setText(weeksTillStartRightFormat);
                     pastSufferDaysNum.setText(daysTillStartRightFormat);
                     pastSufferHoursNum.setText(hoursTillStartRightFormat);
@@ -299,6 +261,7 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
 
                     futureSuffer.setText("Ты будешь страдать");
 
+                    // BLOCK OF CALCULATION OUTPUT "ТЫ БУДЕШЬ СТРАДАТЬ"
                     futureSufferWeeksNum.setText(weeksTIlltheEndFutureRightFormat);
                     futureSufferDaysNum.setText(daysTilltheEndFutureRightFormat);
                     futureSufferHoursNum.setText(hoursTilltheEndFutureRightFormat);
@@ -308,15 +271,79 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                     diagram.setAll(new PieChart.Data("Отмучился", 1),
                             new PieChart.Data("Еще страдать", 2));
                     commentsOut.setText("");
-                }
+                } else if(totalPeriod == 0){
 
-                if (totalPeriod > 30){
+                    daysNum.setText("0 дней");
+                    diagram.setAll(new PieChart.Data("Отмучился", 1),
+                            new PieChart.Data("Еще страдать", 2));
+                    commentsOut.setText("Дата начала и дата конца вахты не могут совпадать!");
+                    commentsOut.setFill(Color.RED);
+                    commentsOut.setTextAlignment(TextAlignment.CENTER);
+
+                    // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
+                    pastSufferWeeksNum.setText("0,0");
+                    pastSufferDaysNum.setText("0,0");
+                    pastSufferHoursNum.setText("0,0");
+                    pastSufferMinutesNum.setText("0,0");
+                    pastSufferSecondsNum.setText("0,0");
+
+                    // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
+                    futureSufferWeeksNum.setText("0,0");
+                    futureSufferDaysNum.setText("0,0");
+                    futureSufferHoursNum.setText("0,0");
+                    futureSufferMinutesNum.setText("0,0");
+                    futureSufferSecondsNum.setText("0,0");
+
+                }  else if (totalPeriod > 30){
                     commentsOut.setText("Как правило, срок вахты не превышает 30 дней");
                     commentsOut.setTextAlignment(TextAlignment.CENTER);
-                }
+                } else {
 
+                    double daysPassed = ChronoUnit.DAYS.between(dateOne, LocalDate.now());
+                    String daysPassedRightFormat = String.format("%.2f", daysPassed);
+                    double weeksPassed = daysPassed / 7;
+                    String weeksPassedRightFormat = String.format("%.4f", weeksPassed);
+                    double hoursPassed = daysPassed * 24;
+                    String hoursPassedRightFormat = String.format("%.2f", hoursPassed);
+                    double minutesPassed = hoursPassed * 60;
+                    String minutesPassedRightFormat = String.format("%.2f", minutesPassed);
+                    double secondsPassed = minutesPassed * 60;
+                    String secondsPasedRightFormat = String.format("%.2f", secondsPassed);
 
-            }});
+                    double daysTilltheEnd = ChronoUnit.DAYS.between(LocalDate.now(), dateTwo);
+                    String daysTilltheEndRightFormat = String.format("%.2f", daysTilltheEnd);
+                    double weeksTilltheEnd = daysTilltheEnd / 7;
+                    String weeksTIlltheEndRightFormat = String.format("%.4f", weeksTilltheEnd);
+                    double hoursTilltheEnd = daysTilltheEnd * 24;
+                    String hoursTilltheEndRightFormat = String.format("%.2f", hoursTilltheEnd);
+                    double minutesTilltheEnd = hoursTilltheEnd * 60;
+                    String minutesTilltheEndRightFormat = String.format("%.2f", minutesTilltheEnd);
+                    double secondsTilltheEnd = minutesTilltheEnd * 60;
+                    String secondsTilltheEndRIghtFormat = String.format("%.2f", secondsTilltheEnd);
+
+                    // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
+                    pastSufferWeeksNum.setText(weeksPassedRightFormat);
+                    pastSufferDaysNum.setText(daysPassedRightFormat);
+                    pastSufferHoursNum.setText(hoursPassedRightFormat);
+                    pastSufferMinutesNum.setText(minutesPassedRightFormat);
+                    pastSufferSecondsNum.setText(secondsPasedRightFormat);
+
+                    // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
+                    futureSufferWeeksNum.setText(weeksTIlltheEndRightFormat);
+                    futureSufferDaysNum.setText(daysTilltheEndRightFormat);
+                    futureSufferHoursNum.setText(hoursTilltheEndRightFormat);
+                    futureSufferMinutesNum.setText(minutesTilltheEndRightFormat);
+                    futureSufferSecondsNum.setText(secondsTilltheEndRIghtFormat);
+
+                    int daysPassedFormatNeeded = (int) daysPassed;
+                    daysNum.setText(Long.toString(totalPeriod) + " дней");
+                    commentsOut.setText(comments.get(daysPassedFormatNeeded));
+                    commentsOut.setFill(Color.BLACK);
+                    commentsOut.setTextAlignment(TextAlignment.CENTER);
+
+                    diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
+                            new PieChart.Data("Еще страдать", daysTilltheEnd));
+                }}});
 
         Button clear = new Button("Очистить");
         HBox hbClrBtn = new HBox(10);
@@ -331,6 +358,7 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                 daysNum.setText("0 дней");
                 pastSuffer.setText("Отмучился");
 
+                // BLOCK OF CALCULATION OUTPUT "ОТМУЧИЛСЯ"
                 pastSufferWeeksNum.setText("0,0");
                 pastSufferDaysNum.setText("0,0");
                 pastSufferHoursNum.setText("0,0");
@@ -338,7 +366,7 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
                 pastSufferSecondsNum.setText("0,0");
 
                 futureSuffer.setText("Еще страдать");
-
+                // BLOCK OF CALCULATION OUTPUT "ЕЩЕ СТРАДАТЬ"
                 futureSufferWeeksNum.setText("0,0");
                 futureSufferDaysNum.setText("0,0");
                 futureSufferHoursNum.setText("0,0");
@@ -347,7 +375,6 @@ diagram.setAll(new PieChart.Data("Отмучился", daysPassed),
 
                 diagram.setAll(new PieChart.Data("Отмучился", 1),
                         new PieChart.Data("Еще страдать", 2));
-
                 commentsOut.setText("");
             }});
 
